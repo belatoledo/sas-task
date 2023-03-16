@@ -8,6 +8,7 @@
 
 <script>
 export default {
-  name: 'ManagerPage'
+  name: 'ManagerPage',
+  layout: 'dashboard'
 }
 </script>

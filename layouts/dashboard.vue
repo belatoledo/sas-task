@@ -27,6 +27,7 @@
           :to="item.to"
           router
           exact
+          class="hover"
         >
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
@@ -36,10 +37,20 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-      <nuxt-link to="/login" @click="logout()">
-        <v-icon>mdi-logout</v-icon>
+      <v-divider />
+      <v-btn
+        class="mt-2 hover d-flex justify-start text-decoration-none"
+        width="100%"
+        text
+        nuxt
+        to="/login"
+        @click="logout()"
+      >
+        <v-icon class="mr-8">
+          mdi-logout
+        </v-icon>
         Logout
-      </nuxt-link>
+      </v-btn>
     </v-navigation-drawer>
     <v-main>
       <v-container>
@@ -47,10 +58,11 @@
       </v-container>
     </v-main>
     <v-footer
-      :absolute="!fixed"
+      absolute="!fixed"
+      class="flexbox"
       app
     >
-      <span>Made by Izabela Toledo • &copy; {{ new Date().getFullYear() }}</span>
+      <p>Made by <span class="secondary--text">Izabela Toledo</span> • &copy; {{ new Date().getFullYear() }}</p>
     </v-footer>
   </v-app>
 </template>
@@ -67,22 +79,29 @@ export default {
     return {
       clipped: true,
       drawer: false,
+      miniVariant: false,
+      right: true,
+      rightDrawer: false,
       fixed: false,
       items: [
         {
           icon: 'mdi-apps',
           title: 'My collection',
-          to: '/collection'
+          to: '/dashboard'
         },
         {
           icon: 'mdi-chart-bubble',
           title: 'Manage colors',
           to: '/manage-colors'
         }
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false
+      ]
+
+    }
+  },
+  methods: {
+    logout () {
+      localStorage.removeItem('token')
+      this.$router.push('/login')
     }
   }
 }

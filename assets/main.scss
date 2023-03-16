@@ -1,0 +1,24 @@
+@import './variables.scss';
+
+* {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.title-text {
+  font-size: 56px !important;
+}
+
+.title-text-mobile {
+	font-size: 36px !important;
+}
+
+.flexbox {
+  margin: 0  auto;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.btn-rounded {
+	border-radius: 8px !important;
+}

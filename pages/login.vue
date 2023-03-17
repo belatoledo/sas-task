@@ -96,8 +96,6 @@ export default {
   methods: {
     loginUser () {
       api.post('/login_json', { login: { email: this.email, password: this.password } }).then((response) => {
-        // eslint-disable-next-line no-console
-        console.log(response)
         localStorage.setItem('token', response.data.data.result.access_token)
         this.$router.push('/dashboard')
       }).catch((error) => {

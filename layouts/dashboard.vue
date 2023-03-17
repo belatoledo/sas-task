@@ -58,7 +58,7 @@
       </v-container>
     </v-main>
     <v-footer
-      absolute="!fixed"
+      :absolute="!fixed"
       class="flexbox"
       app
     >

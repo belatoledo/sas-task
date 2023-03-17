@@ -1,81 +1,80 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <v-card class="logo py-4 d-flex justify-center" />
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template <p>Olá, Visitante</p>
-        </v-card-title>
-        <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-          <p>
-            For more information on Vuetify, check out the <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
+  <v-row class="d-flex">
+    <v-col cols="12">
+      <h1>
+        Welcome to your Pattern Colors collection!
+      </h1>
+      <v-item-group>
+        <v-container>
+          <v-row>
+            <v-col
+              v-for="data in dataList"
+              :key="data.id"
+              cols="12"
+              md="3"
             >
-              documentation
-            </a>.
-          </p>
-          <p>
-            If you have questions, please join the official <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord
-            </a>.
-          </p>
-          <p>
-            Find a bug? Report it on the github <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board
-            </a>.
-          </p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3">
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt Documentation
-          </a>
-          <br>
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn
-            color="primary"
-            nuxt
-            to="/inspire"
-          >
-            Continue
-          </v-btn>
-        </v-card-actions>
-      </v-card>
+              <v-item>
+                <v-card
+                  class="flexbox"
+                  :style="`background-color: ${ data.bg_color }`"
+                  height="150"
+                  style="width: 150px !important;"
+                >
+                  <v-scroll-y-transition>
+                    <div>
+                      <p class="font-weight-medium text-center">
+                        Color
+                      </p>
+                      {{ data.text_color }}
+                    </div>
+                  </v-scroll-y-transition>
+                </v-card>
+              </v-item>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-item-group>
+      <v-btn
+        class="mx-2 btn-position"
+        color="primary"
+        elevation="1"
+        fab
+        small
+        x-large
+      >
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
     </v-col>
   </v-row>
 </template>
 
 <script>
+import { api } from '../api'
+
 export default {
   name: 'DashboardPage',
-  layout: 'dashboard'
+  layout: 'dashboard',
+  data () {
+    return {
+      dataList: []
+    }
+  },
+  mounted () {
+    api.get('/calendar_patterns')
+      .then((response) => {
+        this.dataList = response.data.data.entities
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
 }
 </script>
+<style lang="scss" scoped>
+.btn-position {
+  position: absolute !important;
+  bottom: 40px !important;
+  right: 80px !important;
+}
+
+</style>

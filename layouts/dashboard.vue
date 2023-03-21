@@ -91,8 +91,8 @@ export default {
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'Manage colors',
-          to: '/manage-colors'
+          title: 'About',
+          to: '/about'
         }
       ]
 
